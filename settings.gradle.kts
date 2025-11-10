@@ -1,16 +1,13 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        // Estas linhas dizem ao Gradle para procurar plugins
+        // nos repositórios do Google, Maven e Gradle.
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -19,6 +16,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ddm-NASA-Explorer"
+rootProject.name = "ddmNASAExplorer"
 include(":app")
- 

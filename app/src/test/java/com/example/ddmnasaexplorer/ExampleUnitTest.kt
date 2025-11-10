@@ -1,4 +1,4 @@
-package com.example.ddm_nasa_explorer
+package com.example.ddmnasaexplorer
 
 import org.junit.Test
 
