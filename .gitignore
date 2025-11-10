@@ -1,15 +1,35 @@
+# Diretórios e arquivos de build
+.gradle/
+build/
+**/build/
+
+# Android Studio
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# MacOS
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+
+# Arquivos locais de configuração
 local.properties
+
+# Cache do Gradle Wrapper
+.gradle/
+gradle/
+
+# Arquivos de log
+*.log
+
+# APKs / outputs
+*.apk
+*.aab
+
+# Arquivos de sistema
+*.swp
+*.tmp
+
+# Test reports
+/test-output/
+
+# Outros opcionais
+captures/
