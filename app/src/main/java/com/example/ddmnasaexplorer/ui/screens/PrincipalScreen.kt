@@ -22,8 +22,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.ddmnasaexplorer.data.models.ApodResponse
-import com.example.ddmnasaexplorer.ui.viewmodels.ApodUiState
-import com.example.ddmnasaexplorer.ui.viewmodels.PrincipalViewModel
+import com.example.ddmnasaexplorer.viewmodels.ApodUiState
+import com.example.ddmnasaexplorer.viewmodels.PrincipalViewModel
 
 @Composable
 fun PrincipalScreen(
