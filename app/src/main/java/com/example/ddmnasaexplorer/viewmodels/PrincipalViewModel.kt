@@ -37,7 +37,7 @@ class PrincipalViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = ApodUiState.Loading // Estado de carregamento
             try {
-                val response = NasaApi.retrofitService.getPictureOfTheDay(apiKey = "DEMO_KEY")
+                val response = NasaApi.retrofitService.getPictureOfTheDay(apiKey = "egMRVVd9RHdKrHdYO5srZvr1aAamLCtYQgLkQe8l")
                 _uiState.value = ApodUiState.Success(response)
             } catch (e: IOException) {
                 _uiState.value = ApodUiState.Error("Erro de conexão. Verifique sua internet.")

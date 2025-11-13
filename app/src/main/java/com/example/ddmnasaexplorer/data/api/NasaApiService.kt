@@ -20,7 +20,7 @@ interface NasaApiService {
 
     @GET("planetary/apod") // O caminho do endpoint
     suspend fun getPictureOfTheDay(
-        @Query("egMRVVd9RHdKrHdYO5srZvr1aAamLCtYQgLkQe8l") apiKey: String
+        @Query("api_key") apiKey: String
     ): ApodResponse
 }
 
