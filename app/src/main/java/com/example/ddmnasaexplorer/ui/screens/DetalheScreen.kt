@@ -17,22 +17,53 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import com.example.ddmnasaexplorer.ui.theme.AccentRed
 
 @Composable
 fun DetalhesScreen(title: String, description: String, url: String) {
+    // Estado para controlar se a imagem está favoritada
+    var isFavorite by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        // Título
-        Text(
-            text = title,
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
+        // Linha para o Título e o Botão de Favoritar
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.weight(1f) // Ocupa o máximo de espaço possível
+            )
+
+            // Botão de Favoritar
+            IconButton(onClick = {
+                isFavorite = !isFavorite
+                // TODO: Adicionar lógica para salvar/remover do Room aqui
+            }) {
+                Icon(
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = "Favoritar",
+                    tint = AccentRed // Cor definida no seu tema
+                )
+            }
+        }
+
 
         Spacer(modifier = Modifier.height(16.dp))
 

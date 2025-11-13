@@ -15,6 +15,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import coil.ImageLoader
 
 import com.example.ddmnasaexplorer.ui.screens.DetalhesScreen
 import com.example.ddmnasaexplorer.ui.screens.FavoritosScreen
@@ -62,13 +63,13 @@ fun AppNavigation() {
                 actions = {
                     AsyncImage(
                         model = ImageRequest.Builder(context)
-                            .data("https://gpm.nasa.gov/sites/default/files/2021-11/nasa-logo.png")
+                            .data("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png")
                             .crossfade(true)
                             .build(),
                         contentDescription = "Logo NASA",
                         modifier = Modifier
-                            .size(60.dp)
-                            .padding(end = 8.dp)
+                            .size(50.dp)
+                            .padding(end = 12.dp)
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -113,7 +114,7 @@ fun AppNavigation() {
                 PrincipalScreen(navController = navController)
             }
             composable(NavScreen.Galeria.route) {
-                GaleriaScreen()
+                GaleriaScreen(navController = navController)
             }
             composable(NavScreen.Favoritos.route) {
                 FavoritosScreen()

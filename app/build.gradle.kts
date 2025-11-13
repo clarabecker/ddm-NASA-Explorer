@@ -85,6 +85,7 @@ dependencies {
 
     // --- Carregamento de Imagem (Coil) ---
     implementation(libs.coil.compose)
+    implementation("io.coil-kt:coil-svg:2.7.0")
 
     // --- Banco de Dados (Room) ---
     implementation(libs.androidx.room.runtime)

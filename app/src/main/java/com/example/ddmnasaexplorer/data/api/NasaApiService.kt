@@ -22,6 +22,12 @@ interface NasaApiService {
     suspend fun getPictureOfTheDay(
         @Query("api_key") apiKey: String
     ): ApodResponse
+
+    @GET("planetary/apod")
+    suspend fun getGaleria(
+        @Query("api_key") apiKey: String,
+        @Query("count") count: Int
+    ): List<ApodResponse>
 }
 
 // 4. Um objeto "singleton" para expor a API
