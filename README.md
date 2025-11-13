@@ -44,6 +44,4 @@ Este projeto utiliza a API pública da NASA:
 * **Base URL:** `https://api.nasa.gov/`
 * **Endpoint:** `planetary/apod`
 
-## 👨‍💻 Autor
-
 Desenvolvido por **Clara Becker e Lucas Falcade**
