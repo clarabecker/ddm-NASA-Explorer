@@ -3,7 +3,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp) // <-- Usa o plugin KSP do seu libs
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+
+
 }
 
 android {
@@ -72,6 +75,7 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation("androidx.compose.runtime:runtime-livedata:1.9.4")
     debugImplementation(libs.androidx.compose.ui.tooling)
 
 
@@ -87,13 +91,41 @@ dependencies {
     implementation(libs.coil.compose)
     implementation("io.coil-kt:coil-svg:2.7.0")
 
-    // --- Banco de Dados (Room) ---
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
 
     // --- Testes  ---
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // --- Room ---
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // --- Hilt ---
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        force(
+            "androidx.compose.ui:ui:1.6.8",
+            "androidx.compose.ui:ui-graphics:1.6.8",
+            "androidx.compose.ui:ui-text:1.6.8",
+            "androidx.compose.foundation:foundation:1.6.8",
+            "androidx.compose.foundation:foundation-layout:1.6.8",
+            "androidx.compose.animation:animation:1.6.8",
+            "androidx.compose.animation:animation-core:1.6.8",
+            "androidx.compose.runtime:runtime:1.6.8",
+            "androidx.compose.runtime:runtime-livedata:1.6.8",
+            "androidx.compose.runtime:runtime-saveable:1.6.8",
+            "androidx.compose.material:material:1.6.8",
+            "androidx.compose.material:material-icons-extended:1.6.8",
+            "androidx.compose.ui:ui-tooling:1.6.8",
+            "androidx.compose.ui:ui-tooling-preview:1.6.8"
+        )
+    }
 }

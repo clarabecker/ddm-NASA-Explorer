@@ -7,8 +7,9 @@ kotlin = "1.9.24" # Versão estável do Kotlin
 ksp = "1.9.24-1.0.20" # Plugin para Room (deve bater com a versão do Kotlin)
 coreKtx = "1.13.1"
 
+
 # --- Compose ---
-androidxComposeBom = "2024.06.00" # Gerencia versões do Compose
+androidxComposeBom = "2024.02.00" # Gerencia versões do Compose
 androidxComposeCompiler = "1.5.14" # Compilador do Compose (compatível com Kotlin 1.9.24)
 androidxLifecycle = "2.8.3" # Para ViewModel
 androidxNavigationCompose = "2.7.7" # Para Navegação
@@ -24,6 +25,8 @@ androidxRoom = "2.6.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+
+hilt = "2.48"
 
 [libraries]
 # --- Core ---
@@ -59,7 +62,14 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+

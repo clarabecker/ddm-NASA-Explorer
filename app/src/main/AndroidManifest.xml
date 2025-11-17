@@ -4,6 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.example.ddmnasaexplorer.App"
+        android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Light.NoTitleBar">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.ddmnasaexplorer.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

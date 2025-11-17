@@ -4,10 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ddmnasaexplorer.data.api.NasaApi
 import com.example.ddmnasaexplorer.data.models.ApodResponse
+import com.example.ddmnasaexplorer.data.room.FavoriteApod
+import com.example.ddmnasaexplorer.repository.FavoriteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 // Estado específico para a Galeria (Lista de fotos)
 sealed interface GaleriaUiState {
@@ -16,8 +20,10 @@ sealed interface GaleriaUiState {
     data class Error(val message: String) : GaleriaUiState
 }
 
-class GaleriaViewModel : ViewModel() {
-
+@HiltViewModel
+class GaleriaViewModel @Inject constructor(
+    private val favoritesRepository: FavoriteRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow<GaleriaUiState>(GaleriaUiState.Loading)
     val uiState: StateFlow<GaleriaUiState> = _uiState.asStateFlow()
 
@@ -63,4 +69,19 @@ class GaleriaViewModel : ViewModel() {
             }
         }
     }
+
+    fun toggleFavorite(photo: ApodResponse) {
+        viewModelScope.launch {
+            val favorite = FavoriteApod(
+                url = photo.url,
+                title = photo.title ?: "Sem título",
+                explanation = photo.explanation ?: "",
+                mediaType = photo.mediaType,
+                hdUrl = photo.hdUrl
+            )
+
+            favoritesRepository.addFavorite(favorite)
+        }
+    }
+
 }

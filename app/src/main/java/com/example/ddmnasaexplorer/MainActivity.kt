@@ -1,4 +1,4 @@
-package com.example.ddm_nasa_explorer
+package com.example.ddmnasaexplorer
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 
 import com.example.ddmnasaexplorer.ui.navigation.AppNavigation
 import com.example.ddmnasaexplorer.ui.theme.DdmNASAExplorerTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

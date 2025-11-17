@@ -30,11 +30,16 @@ import com.example.ddmnasaexplorer.data.models.ApodResponse
 import com.example.ddmnasaexplorer.viewmodels.GaleriaUiState
 import com.example.ddmnasaexplorer.viewmodels.GaleriaViewModel
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ddmnasaexplorer.data.room.FavoriteApod
+import com.example.ddmnasaexplorer.viewmodels.FavoritesViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun GaleriaScreen(
     navController: NavController? = null,
-    viewModel: GaleriaViewModel = viewModel()
+    viewModel: GaleriaViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -55,6 +60,10 @@ fun GaleriaScreen(
             viewModel.fetchGaleria() // Carrega mais 10!
         }
     }
+
+    // PEGAR FAVORITOS DO BANCO
+    val favoritesViewModel: FavoritesViewModel = hiltViewModel()
+    val favorites by favoritesViewModel.favorites.observeAsState(emptyList())
 
     Column(
         modifier = Modifier
@@ -81,7 +90,14 @@ fun GaleriaScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(photos) { photo ->
-                        GaleriaItemCard(photo = photo, navController = navController)
+                        val isFavorite = favorites.any { it.url == photo.url }
+
+                        GaleriaItemCard(
+                            photo = photo,
+                            navController = navController,
+                            favoritesViewModel = favoritesViewModel,
+                            isInitiallyFavorite = isFavorite
+                        )
                     }
 
                     item {
@@ -99,10 +115,24 @@ fun GaleriaScreen(
 }
 
 @Composable
-fun GaleriaItemCard(photo: ApodResponse, navController: NavController?) {
+fun GaleriaItemCard(photo: ApodResponse,
+                    navController: NavController?,
+                    favoritesViewModel: FavoritesViewModel,
+                    isInitiallyFavorite: Boolean) {
     // Estado local para controlar o coração (favorito) visualmente
-    var isFavorite by remember { mutableStateOf(false) }
+    var isFavorite by remember { mutableStateOf(isInitiallyFavorite) }
     val borderColor = Color(0xFF0B3D91)
+    val coroutineScope = rememberCoroutineScope() // <-- coroutine para chamar funções suspend
+
+
+    // Converter APOD → FavoriteApod (para salvar no Room)
+    val favoriteApod = FavoriteApod(
+        url = photo.url,
+        title = photo.title,
+        explanation = photo.explanation,
+        mediaType = photo.mediaType,
+        hdUrl = photo.hdUrl
+    )
 
     Card(
         colors = CardDefaults.cardColors(containerColor = Color(0xFF1C2130)), // Fundo do Card
@@ -161,8 +191,11 @@ fun GaleriaItemCard(photo: ApodResponse, navController: NavController?) {
 
                     // Ícone de Favorito (Coração)
                     IconButton(onClick = {
-                        isFavorite = !isFavorite
-                        // AQUI: Futuramente vamos salvar no Banco de Dados Room
+                        //isFavorite = !isFavorite
+                        coroutineScope.launch {
+                            favoritesViewModel.toggleFavorite(favoriteApod)
+                        }
+
                     }) {
                         Icon(
                             imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,

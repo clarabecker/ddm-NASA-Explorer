@@ -1,5 +1,6 @@
 package com.example.ddmnasaexplorer.ui.navigation
 
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -18,7 +19,7 @@ import androidx.navigation.navArgument
 import coil.ImageLoader
 
 import com.example.ddmnasaexplorer.ui.screens.DetalhesScreen
-import com.example.ddmnasaexplorer.ui.screens.FavoritosScreen
+
 import com.example.ddmnasaexplorer.ui.screens.GaleriaScreen
 import com.example.ddmnasaexplorer.ui.screens.PrincipalScreen
 
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.foundation.layout.fillMaxSize
+import com.example.ddmnasaexplorer.ui.screens.FavoritoScreen
 
 
 // 1. Definição das rotas para a barra de navegação
@@ -117,7 +119,7 @@ fun AppNavigation() {
                 GaleriaScreen(navController = navController)
             }
             composable(NavScreen.Favoritos.route) {
-                FavoritosScreen()
+                FavoritoScreen()
             }
             composable(
                 route = "detalhes/{title}/{description}/{url}",
@@ -135,3 +137,4 @@ fun AppNavigation() {
         }
     }
 }
+
