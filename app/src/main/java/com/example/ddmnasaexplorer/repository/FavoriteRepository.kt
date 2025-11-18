@@ -19,4 +19,8 @@ class FavoriteRepository @Inject constructor(
     suspend fun removeFavorite(apod: FavoriteApod) {
         dao.delete(apod)
     }
+
+    suspend fun getFavoriteByUrl(url: String): FavoriteApod? {
+        return dao.getByUrl(url)
+    }
 }

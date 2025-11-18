@@ -14,4 +14,7 @@ interface FavoriteDao {
 
     @Delete
     suspend fun delete(favorite: FavoriteApod)
+
+    @Query("SELECT * FROM favorites WHERE url = :url LIMIT 1")
+    suspend fun getByUrl(url: String): FavoriteApod?
 }

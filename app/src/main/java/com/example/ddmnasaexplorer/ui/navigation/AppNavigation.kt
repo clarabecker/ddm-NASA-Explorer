@@ -17,6 +17,7 @@ import androidx.navigation.compose.*
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import coil.ImageLoader
+import android.net.Uri
 
 import com.example.ddmnasaexplorer.ui.screens.DetalhesScreen
 
@@ -119,20 +120,25 @@ fun AppNavigation() {
                 GaleriaScreen(navController = navController)
             }
             composable(NavScreen.Favoritos.route) {
-                FavoritoScreen()
+                FavoritoScreen(navController = navController)
             }
             composable(
-                route = "detalhes/{title}/{description}/{url}",
+                route = "detalhes/{title}/{desc}/{url}",
                 arguments = listOf(
                     navArgument("title") { type = NavType.StringType },
-                    navArgument("description") { type = NavType.StringType },
+                    navArgument("desc") { type = NavType.StringType },
                     navArgument("url") { type = NavType.StringType }
                 )
             ) { backStackEntry ->
                 val title = backStackEntry.arguments?.getString("title") ?: ""
-                val description = backStackEntry.arguments?.getString("description") ?: ""
+                val desc = backStackEntry.arguments?.getString("desc") ?: ""
                 val url = backStackEntry.arguments?.getString("url") ?: ""
-                DetalhesScreen(title = title, description = description, url = url)
+
+                DetalhesScreen(
+                    title = Uri.decode(title),
+                    description = Uri.decode(desc),
+                    url = Uri.decode(url)
+                )
             }
         }
     }

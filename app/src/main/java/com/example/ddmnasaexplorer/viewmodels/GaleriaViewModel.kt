@@ -70,18 +70,4 @@ class GaleriaViewModel @Inject constructor(
         }
     }
 
-    fun toggleFavorite(photo: ApodResponse) {
-        viewModelScope.launch {
-            val favorite = FavoriteApod(
-                url = photo.url,
-                title = photo.title ?: "Sem título",
-                explanation = photo.explanation ?: "",
-                mediaType = photo.mediaType,
-                hdUrl = photo.hdUrl
-            )
-
-            favoritesRepository.addFavorite(favorite)
-        }
-    }
-
 }

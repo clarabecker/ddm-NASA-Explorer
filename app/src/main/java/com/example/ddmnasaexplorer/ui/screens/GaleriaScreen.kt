@@ -96,8 +96,7 @@ fun GaleriaScreen(
                             photo = photo,
                             navController = navController,
                             favoritesViewModel = favoritesViewModel,
-                            isInitiallyFavorite = isFavorite
-                        )
+                            isFavorite = isFavorite                       )
                     }
 
                     item {
@@ -118,9 +117,11 @@ fun GaleriaScreen(
 fun GaleriaItemCard(photo: ApodResponse,
                     navController: NavController?,
                     favoritesViewModel: FavoritesViewModel,
-                    isInitiallyFavorite: Boolean) {
+                    isFavorite: Boolean
+) {
     // Estado local para controlar o coração (favorito) visualmente
-    var isFavorite by remember { mutableStateOf(isInitiallyFavorite) }
+
+
     val borderColor = Color(0xFF0B3D91)
     val coroutineScope = rememberCoroutineScope() // <-- coroutine para chamar funções suspend
 
@@ -191,11 +192,7 @@ fun GaleriaItemCard(photo: ApodResponse,
 
                     // Ícone de Favorito (Coração)
                     IconButton(onClick = {
-                        //isFavorite = !isFavorite
-                        coroutineScope.launch {
-                            favoritesViewModel.toggleFavorite(favoriteApod)
-                        }
-
+                        favoritesViewModel.toggleFavorite(favoriteApod)
                     }) {
                         Icon(
                             imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,

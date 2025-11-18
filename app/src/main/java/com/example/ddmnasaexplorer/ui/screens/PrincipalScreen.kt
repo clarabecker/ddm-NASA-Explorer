@@ -132,9 +132,13 @@ fun SuccessState(apodData: ApodResponse, navController: NavController) {
         Button(
             onClick = {
                 // Codifica os textos para passar na URL (evita erros com espaços e acentos)
-                val encodedTitle = Uri.encode(apodData.title)
-                val encodedDesc = Uri.encode(apodData.explanation)
-                val encodedUrl = Uri.encode(apodData.url)
+                val title = apodData.title ?: ""
+                val desc = apodData.explanation ?: ""
+                val url = apodData.url ?: ""
+
+                val encodedTitle = Uri.encode(title)
+                val encodedDesc = Uri.encode(desc)
+                val encodedUrl = Uri.encode(url)
 
                 // Navega passando os dados
                 navController.navigate("detalhes/$encodedTitle/$encodedDesc/$encodedUrl")

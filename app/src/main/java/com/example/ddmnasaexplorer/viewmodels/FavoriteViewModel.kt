@@ -19,10 +19,9 @@ class FavoritesViewModel @Inject constructor(
 
     fun toggleFavorite(apod: FavoriteApod) {
         viewModelScope.launch {
-            val current = favorites.value ?: emptyList()
-            val isFavorite = current.any { it.url == apod.url }
-            if (isFavorite) {
-                repository.removeFavorite(apod)
+            val existing = repository.getFavoriteByUrl(apod.url)
+            if (existing != null) {
+                repository.removeFavorite(existing)
             } else {
                 repository.addFavorite(apod)
             }
