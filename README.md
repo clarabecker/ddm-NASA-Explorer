@@ -25,19 +25,6 @@ O projeto foi construído seguindo as melhores práticas de desenvolvimento Andr
 * **Carregamento de Imagens:** [Coil](https://coil-kt.github.io/coil/)
 * **Assincronismo:** Coroutines & Flow
 
-## 🔧 Como Rodar o Projeto
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/SEU_USUARIO/ddm-nasa-explorer.git](https://github.com/SEU_USUARIO/ddm-nasa-explorer.git)
-    ```
-2.  **Abra no Android Studio:**
-    * Selecione a pasta do projeto clonado.
-    * Aguarde a sincronização do Gradle.
-3.  **Execute:**
-    * Conecte um dispositivo físico ou inicie um emulador.
-    * Clique no botão **Run** (▶️).
-
 ## 📚 API Reference
 
 Este projeto utiliza a API pública da NASA:
